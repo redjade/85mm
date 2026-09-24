@@ -1,0 +1,43 @@
+---
+// 35mm 프레임 안에 50mm, 85mm 프레임이 차지하는 크기 (풀프레임, 같은 자리에서)
+const W = 600;
+const H = 400;
+const frames = [
+  { f: 35, label: '35mm', cls: 'f35' },
+  { f: 50, label: '50mm', cls: 'f50' },
+  { f: 85, label: '85mm', cls: 'f85' },
+].map((fr) => {
+  const s = 35 / fr.f;
+  const w = W * s;
+  const h = H * s;
+  return { ...fr, x: (W - w) / 2, y: (H - h) / 2, w, h };
+});
+---
+
+<figure class="frames">
+  <svg viewBox={`-2 -2 ${W + 4} ${H + 4}`} role="img" aria-label="35mm, 50mm, 85mm 화각 비교">
+    {
+      frames.map((fr) => (
+        <g class={fr.cls}>
+          <rect x={fr.x} y={fr.y} width={fr.w} height={fr.h} />
+          <text x={fr.x + 10} y={fr.y + 24}>{fr.label}</text>
+        </g>
+      ))
+    }
+  </svg>
+  <figcaption>같은 자리에서 본 프레임 크기. 85mm는 35mm 프레임 면적의 약 17%다.</figcaption>
+</figure>
+
+<style>
+  .frames { margin: 2rem 0; }
+  svg { width: 100%; height: auto; display: block; background: var(--bg-soft); border-radius: 4px; }
+  rect { fill: none; stroke-width: 2; }
+  text { font-family: var(--sans); font-size: 18px; }
+  .f35 rect { stroke: var(--ink-faint); }
+  .f35 text { fill: var(--ink-faint); }
+  .f50 rect { stroke: var(--ink-soft); stroke-dasharray: 6 5; }
+  .f50 text { fill: var(--ink-soft); }
+  .f85 rect { stroke: var(--accent); stroke-width: 3; fill: var(--accent-soft); fill-opacity: 0.6; }
+  .f85 text { fill: var(--accent); font-weight: 600; }
+  figcaption { font-size: 0.85rem; color: var(--ink-faint); margin-top: 0.5rem; }
+</style>

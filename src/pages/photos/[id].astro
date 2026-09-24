@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { u, getPhotos, fmtDate, exifLine, drillNo, DISTANCE_LABEL, MOOD_LABEL } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const photos = await getPhotos();
+  return photos.map((entry, i) => ({
+    params: { id: entry.id },
+    // getPhotos는 최신순: newer = 더 최근, older = 더 이전
+    props: { entry, newer: photos[i - 1], older: photos[i + 1] },
+  }));
+}
+
+const { entry, newer, older } = Astro.props;
+const d = entry.data;
+const drill = d.drill ? await getEntry(d.drill) : undefined;
+const exif = exifLine(d.exif);
+---
+
+<Base title={d.title} description={d.seen || d.alt}>
+  <figure class="stage">
+    <Image
+      src={d.image}
+      alt={d.alt}
+      widths={[960, 1600, 2400]}
+      sizes="(max-width: 1400px) 100vw, 1400px"
+      loading="eager"
+    />
+  </figure>
+
+  <div class="wrap meta">
+    <div class="main">
+      <p class="eyebrow">{fmtDate(d.date)}{exif && ` · ${exif}`}</p>
+      <h1>{d.title}</h1>
+      {
+        d.seen && (
+          <div class="note">
+            <h2>보았다</h2>
+            <p>{d.seen}</p>
+          </div>
+        )
+      }
+      {
+        d.omitted && (
+          <div class="note">
+            <h2>생략했다</h2>
+            <p>{d.omitted}</p>
+          </div>
+        )
+      }
+    </div>
+    <aside class="side small">
+      <dl>
+        <div>
+          <dt>거리</dt>
+          <dd>{DISTANCE_LABEL[d.distance]}</dd>
+        </div>
+        <div>
+          <dt>분위기</dt>
+          <dd>
+            <span class="mood" aria-label={`고요 1 … 흥분 5 중 ${d.mood}`}>
+              {[1, 2, 3, 4, 5].map((i) => <i class={i <= d.mood ? 'on' : ''} />)}
+            </span>
+            {MOOD_LABEL[d.mood]}
+          </dd>
+        </div>
+        {
+          drill && (
+            <div>
+              <dt>연습</dt>
+              <dd>
+                <a href={u(`/drills/${drill.id}/`)}>
+                  {drillNo(drill.data.no)} {drill.data.title}
+                </a>
+              </dd>
+            </div>
+          )
+        }
+        {
+          d.exif.lens && (
+            <div>
+              <dt>렌즈</dt>
+              <dd>{d.exif.lens}</dd>
+            </div>
+          )
+        }
+      </dl>
+      <ul class="tags">{d.elements.map((e) => <li class="tag el">{e}</li>)}</ul>
+    </aside>
+  </div>
+
+  <nav class="wrap pager small">
+    {older ? <a href={u(`/photos/${older.id}/`)}>← 이전 사진</a> : <span />}
+    <a href={u('/photos/')}>기록</a>
+    {newer ? <a href={u(`/photos/${newer.id}/`)}>다음 사진 →</a> : <span />}
+  </nav>
+</Base>
+
+<style>
+  .stage { margin: -3rem 0 2rem; background: var(--photo-bg); display: flex; justify-content: center; }
+  .stage img { max-height: 88vh; width: auto; max-width: min(100%, 1400px); object-fit: contain; }
+  .meta { display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: 2.5rem; }
+  @media (max-width: 760px) {
+    .meta { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+  .note h2 { font-size: 0.8rem; font-family: var(--sans); color: var(--ink-faint); letter-spacing: 0.1em; margin: 1.6rem 0 0.2rem; }
+  .note p { margin: 0; font-family: var(--serif); font-size: 1.08rem; }
+  .side dl { margin: 0 0 1rem; }
+  .side dl > div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--line); }
+  .side dt { color: var(--ink-faint); }
+  .side dd { margin: 0; text-align: right; }
+  .mood { display: inline-flex; gap: 3px; margin-right: 0.4rem; vertical-align: middle; }
+  .mood i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+  .mood i.on { background: var(--accent); }
+  .pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+</style>

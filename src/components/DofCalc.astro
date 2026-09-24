@@ -1,0 +1,100 @@
+---
+// 85mm 풀프레임 피사계심도·프레임 계산기 (허용 착란원 0.03mm)
+---
+
+<div class="dof" data-dof>
+  <p class="eyebrow">계산기 · 85mm 풀프레임</p>
+  <div class="row">
+    <label for="dof-dist">거리 <output data-out="dist">3.0m</output></label>
+    <input id="dof-dist" type="range" min="0" max="1000" value="274" data-in="dist" />
+  </div>
+  <div class="row">
+    <span class="lbl">조리개</span>
+    <div class="stops" role="radiogroup" aria-label="조리개">
+      {
+        [1.8, 2, 2.8, 4, 5.6, 8, 11].map((n) => (
+          <button type="button" class="tag" data-n={n} aria-pressed={n === 1.8 ? 'true' : 'false'}>
+            f/{n}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+  <dl class="out">
+    <div><dt>선명한 두께</dt><dd data-out="total">—</dd></div>
+    <div><dt>앞 / 뒤 경계</dt><dd data-out="range">—</dd></div>
+    <div><dt>프레임 (가로 사진)</dt><dd data-out="frame">—</dd></div>
+    <div><dt>과초점 거리</dt><dd data-out="hyper">—</dd></div>
+  </dl>
+  <div class="bar" aria-hidden="true"><span data-out="bar"></span></div>
+  <p class="note" data-out="note"></p>
+</div>
+
+<script>
+  const F = 85;
+  const C = 0.03;
+  const MIN = 0.8;
+  const MAX = 100;
+
+  function fmtLen(mm: number): string {
+    if (!isFinite(mm)) return '∞';
+    if (mm < 1000) return `${Math.round(mm / 10)}cm`;
+    const m = mm / 1000;
+    return m < 10 ? `${m.toFixed(2)}m` : `${m.toFixed(1)}m`;
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-dof]')) {
+    const slider = root.querySelector<HTMLInputElement>('[data-in="dist"]')!;
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-n]')];
+    const out = (k: string) => root.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+    let N = 1.8;
+
+    const dist = () => MIN * Math.pow(MAX / MIN, Number(slider.value) / 1000); // m, 로그 스케일
+
+    function render() {
+      const s = dist() * 1000;
+      const H = (F * F) / (N * C) + F;
+      const near = (s * (H - F)) / (H + s - 2 * F);
+      const far = s < H ? (s * (H - F)) / (H - s) : Infinity;
+      const total = far - near;
+      out('dist').textContent = `${(s / 1000).toFixed(s < 10000 ? 1 : 0)}m`;
+      out('total').textContent = fmtLen(total);
+      out('range').textContent = `${fmtLen(near)} ~ ${fmtLen(far)}`;
+      out('frame').textContent = `${fmtLen((s * 36) / F)} × ${fmtLen((s * 24) / F)}`;
+      out('hyper').textContent = `${fmtLen(H)} (여기에 맞추면 ${fmtLen(H / 2)}~∞)`;
+      const pct = isFinite(total) ? Math.min(100, (total / s) * 100) : 100;
+      out('bar').style.width = `${Math.max(1, pct)}%`;
+      let note = '';
+      if (s <= 2000) note = '가까이: 눈 하나와 코끝의 초점이 갈릴 수 있는 거리.';
+      else if (s <= 8000) {
+        note = total < 250 ? '두 사람이 앞뒤로 서면 한 사람은 흐려진다. 나란히 세우거나 조인다.' : '나란히 선 두 사람은 충분히 들어온다.';
+      } else note = far === Infinity ? '먼 곳까지 모두 선명하다. 겹을 포개기 좋다.' : '멀리: 겹과 공기의 거리.';
+      out('note').textContent = note;
+    }
+
+    slider.addEventListener('input', render);
+    for (const b of buttons) {
+      b.addEventListener('click', () => {
+        N = Number(b.dataset.n);
+        for (const o of buttons) o.setAttribute('aria-pressed', String(o === b));
+        render();
+      });
+    }
+    render();
+  }
+</script>
+
+<style>
+  .dof { border: 1px solid var(--line); border-radius: 6px; padding: 1.2rem; margin: 2rem 0; background: var(--bg-soft); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin-bottom: 0.9rem; }
+  .row label, .lbl { min-width: 6.5rem; font-size: 0.92rem; }
+  output { font-family: var(--mono); color: var(--accent); margin-left: 0.3rem; }
+  input[type='range'] { flex: 1 1 14rem; accent-color: var(--accent); }
+  .stops { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .out { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.8rem; margin: 1rem 0 0.8rem; }
+  .out dt { font-size: 0.78rem; color: var(--ink-faint); }
+  .out dd { margin: 0; font-family: var(--mono); font-size: 0.98rem; }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .bar span { display: block; height: 100%; background: var(--accent); }
+  .note { font-size: 0.9rem; color: var(--ink-soft); margin: 0.8rem 0 0; }
+</style>

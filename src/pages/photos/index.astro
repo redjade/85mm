@@ -1,0 +1,69 @@
+---
+import Page from '../../layouts/Page.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import { ELEMENTS, DISTANCES } from '../../content.config';
+import { getPhotos, DISTANCE_LABEL } from '../../lib/site';
+const photos = await getPhotos();
+---
+
+<Page title="기록" eyebrow="찍은 사진과 두 줄 메모" lede="무엇을 보았나, 무엇을 생략했나. 여섯 가지 말과 거리로 걸러 볼 수 있다.">
+  <div slot="after">
+    {
+      photos.length ? (
+        <div data-filter>
+          <div class="filters">
+            <ul class="tags">
+              {DISTANCES.map((d) => (
+                <li><button type="button" class="tag" data-key="distance" data-val={d} aria-pressed="false">{DISTANCE_LABEL[d]}</button></li>
+              ))}
+            </ul>
+            <ul class="tags">
+              {ELEMENTS.map((e) => (
+                <li><button type="button" class="tag" data-key="elements" data-val={e} aria-pressed="false">{e}</button></li>
+              ))}
+            </ul>
+            <p class="small muted" data-count>{photos.length}장</p>
+          </div>
+          <PhotoGrid photos={photos} filterable />
+        </div>
+      ) : (
+        <p class="empty">
+          아직 올린 사진이 없다. 사진 폴더를 정해 Claude에게 "사진 올려줘"라고 하면 <code>add-photo</code> 스킬이 웹용 사본을 만들고
+          메모를 함께 적는다.
+        </p>
+      )
+    }
+  </div>
+</Page>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-filter]')) {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('button[data-key]')];
+    const items = [...root.querySelectorAll<HTMLElement>('.photo-grid > a')];
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    const apply = () => {
+      const on = buttons.filter((b) => b.getAttribute('aria-pressed') === 'true');
+      const dist = on.filter((b) => b.dataset.key === 'distance').map((b) => b.dataset.val!);
+      const els = on.filter((b) => b.dataset.key === 'elements').map((b) => b.dataset.val!);
+      let shown = 0;
+      for (const it of items) {
+        const itEls = (it.dataset.elements ?? '').split(' ');
+        const ok = (!dist.length || dist.includes(it.dataset.distance!)) && els.every((e) => itEls.includes(e));
+        it.hidden = !ok;
+        if (ok) shown++;
+      }
+      count.textContent = `${shown}장`;
+    };
+    for (const b of buttons) {
+      b.addEventListener('click', () => {
+        b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+        apply();
+      });
+    }
+  }
+</script>
+
+<style>
+  .filters { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
+  .filters p { margin: 0.2rem 0 0; }
+</style>

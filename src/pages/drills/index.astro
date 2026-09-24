@@ -1,0 +1,39 @@
+---
+import Page from '../../layouts/Page.astro';
+import { u, getDrills, getPhotos, drillNo, DISTANCE_LABEL } from '../../lib/site';
+const drills = await getDrills();
+const photos = await getPhotos();
+const count = (id: string) => photos.filter((p) => p.data.drill?.id === id).length;
+---
+
+<Page
+  title="연습"
+  eyebrow="제약이 있는 과제"
+  lede="나갈 때 하나를 골라 들고 나간다. 과제, 제약, 끝나고 던질 질문. 찍은 사진을 기록에 올릴 때 연습 번호를 붙이면 여기에 쌓인다."
+>
+  <div slot="after" class="grid">
+    {
+      drills.map((d) => {
+        const n = count(d.id);
+        return (
+          <a class="card" href={u(`/drills/${d.id}/`)}>
+            <span class="no">
+              {drillNo(d.data.no)} · {d.data.time}
+              {n > 0 && <span class="done"> · 사진 {n}장</span>}
+            </span>
+            <h3>{d.data.title}</h3>
+            <p>{d.data.task}</p>
+            <ul class="tags">
+              {d.data.distance.map((x) => <li class="tag">{DISTANCE_LABEL[x]}</li>)}
+              {d.data.elements.map((e) => <li class="tag el">{e}</li>)}
+            </ul>
+          </a>
+        );
+      })
+    }
+  </div>
+</Page>
+
+<style>
+  .done { color: var(--ink-soft); }
+</style>

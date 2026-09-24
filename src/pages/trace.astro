@@ -1,0 +1,203 @@
+---
+import { Image } from 'astro:assets';
+import Page from '../layouts/Page.astro';
+import { ELEMENTS, DISTANCES } from '../content.config';
+import { u, getPhotos, getDrills, drillNo, DISTANCE_LABEL, DISTANCE_HINT, MOOD_LABEL } from '../lib/site';
+
+const photos = await getPhotos();
+const drills = await getDrills();
+const MOODS = [1, 2, 3, 4, 5];
+
+// 시선 지도: 세로 = 거리, 가로 = 고요(1) … 흥분(5)
+const cell = (dist: string, mood: number) =>
+  photos.filter((p) => p.data.distance === dist && p.data.mood === mood);
+const maxCell = Math.max(1, ...DISTANCES.flatMap((d) => MOODS.map((m) => cell(d, m).length)));
+
+// 달마다 (오래된 달부터)
+const months = new Map<string, typeof photos>();
+for (const p of [...photos].reverse()) {
+  const k = `${p.data.date.getUTCFullYear()}.${String(p.data.date.getUTCMonth() + 1).padStart(2, '0')}`;
+  months.set(k, [...(months.get(k) ?? []), p]);
+}
+
+// 조리개 분포
+const buckets = [
+  { label: 'f/1.8–2', test: (n: number) => n < 2.2 },
+  { label: 'f/2.2–2.8', test: (n: number) => n >= 2.2 && n < 3.2 },
+  { label: 'f/3.2–4', test: (n: number) => n >= 3.2 && n < 4.5 },
+  { label: 'f/4.5–5.6', test: (n: number) => n >= 4.5 && n < 6.3 },
+  { label: 'f/6.3 이상', test: (n: number) => n >= 6.3 },
+].map((b) => ({
+  label: b.label,
+  n: photos.filter((p) => p.data.exif.fnumber !== undefined && b.test(p.data.exif.fnumber)).length,
+}));
+const apMax = Math.max(1, ...buckets.map((b) => b.n));
+
+const elCounts = ELEMENTS.map((e) => ({ e, n: photos.filter((p) => p.data.elements.includes(e)).length }));
+const elMax = Math.max(1, ...elCounts.map((x) => x.n));
+
+const drillCounts = drills.map((d) => ({ d, n: photos.filter((p) => p.data.drill?.id === d.id).length }));
+---
+
+<Page
+  title="궤적"
+  eyebrow="쌓인 사진을 펼쳐 보기"
+  lede="내 시선이 어디에 몰려 있고 어디를 비워 두는지. 사진이 쌓일수록 이 페이지가 채워진다."
+>
+  <div slot="after" class="trace">
+    {photos.length === 0 && <p class="empty">아직 사진이 없어서 궤적도 비어 있다. 첫 사진을 올리면 여기부터 채워진다.</p>}
+
+    <section>
+      <h2>시선 지도</h2>
+      <p class="muted small">세로는 거리, 가로는 고요에서 흥분까지. 빈 칸이 다음에 가 볼 곳이다.</p>
+      <div class="map">
+        <div class="corner"></div>
+        {MOODS.map((m) => <div class="colh small muted">{MOOD_LABEL[m]}</div>)}
+        {
+          DISTANCES.map((d) => (
+            <Fragment>
+              <div class="rowh">
+                <strong>{DISTANCE_LABEL[d]}</strong>
+                <span class="small muted">{DISTANCE_HINT[d]}</span>
+              </div>
+              {MOODS.map((m) => {
+                const ps = cell(d, m);
+                return (
+                  <div class="cell" style={`--k:${ps.length / maxCell}`}>
+                    {ps.slice(0, 4).map((p) => (
+                      <a href={u(`/photos/${p.id}/`)} title={p.data.title}>
+                        <Image src={p.data.image} alt={p.data.alt} width={160} />
+                      </a>
+                    ))}
+                    {ps.length > 4 && <span class="more small">+{ps.length - 4}</span>}
+                  </div>
+                );
+              })}
+            </Fragment>
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2>달마다</h2>
+      {
+        months.size ? (
+          [...months].map(([k, ps]) => (
+            <div class="month">
+              <p class="mlabel small">
+                <span>{k}</span> <span class="muted">{ps.length}장</span>
+              </p>
+              <div class="sheet">
+                {ps.map((p) => (
+                  <a href={u(`/photos/${p.id}/`)} title={p.data.title}>
+                    <Image src={p.data.image} alt={p.data.alt} width={200} />
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p class="muted small">—</p>
+        )
+      }
+    </section>
+
+    <div class="two">
+      <section>
+        <h2>조리개</h2>
+        <ul class="bars">
+          {
+            buckets.map((b) => (
+              <li>
+                <span class="k">{b.label}</span>
+                <span class="b">
+                  <i style={`width:${(b.n / apMax) * 100}%`} />
+                </span>
+                <span class="n">{b.n}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <section>
+        <h2>여섯 가지 말</h2>
+        <ul class="bars">
+          {
+            elCounts.map((x) => (
+              <li>
+                <span class="k">{x.e}</span>
+                <span class="b">
+                  <i style={`width:${(x.n / elMax) * 100}%`} />
+                </span>
+                <span class="n">{x.n}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+
+    <section>
+      <h2>연습</h2>
+      <ol class="drills">
+        {
+          drillCounts.map(({ d, n }) => (
+            <li class={n ? 'done' : ''}>
+              <a href={u(`/drills/${d.id}/`)}>
+                <span class="no">{drillNo(d.data.no)}</span> {d.data.title}
+              </a>
+              <span class="small muted">{n ? `${n}장` : '아직'}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </div>
+</Page>
+
+<style>
+  .trace { margin-top: 1rem; }
+  .map { display: grid; grid-template-columns: 8.5rem repeat(5, minmax(0, 1fr)); gap: 4px; }
+  .colh { text-align: center; padding-bottom: 0.2rem; }
+  .rowh { display: flex; flex-direction: column; justify-content: center; line-height: 1.35; padding-right: 0.5rem; }
+  .rowh .small { font-size: 0.72rem; }
+  .cell {
+    min-height: 6.5rem;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--accent) calc(var(--k) * 28%), var(--bg-soft));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    padding: 3px;
+    align-content: start;
+    position: relative;
+  }
+  .cell a { aspect-ratio: 1; overflow: hidden; display: block; }
+  .cell img { width: 100%; height: 100%; object-fit: cover; }
+  .more { position: absolute; right: 6px; bottom: 4px; color: var(--ink-soft); }
+  @media (max-width: 620px) {
+    .map { grid-template-columns: 4.2rem repeat(5, minmax(0, 1fr)); }
+    .rowh .small { display: none; }
+    .rowh strong { font-size: 0.8rem; }
+    .colh { font-size: 0.72rem; }
+    .cell { min-height: 4rem; grid-template-columns: 1fr; }
+  }
+  .month { margin-bottom: 1.2rem; }
+  .mlabel { font-family: var(--mono); margin: 0 0 0.3rem; }
+  .sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr)); gap: 3px; }
+  .sheet a { aspect-ratio: 3 / 2; overflow: hidden; background: var(--photo-bg); }
+  .sheet img { width: 100%; height: 100%; object-fit: cover; }
+  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 0 3rem; margin-top: 3.5rem; }
+  .two section + section { margin-top: 0; }
+  .bars { list-style: none; padding: 0; margin: 0; }
+  .bars li { display: grid; grid-template-columns: 6.5rem 1fr 2rem; align-items: center; gap: 0.6rem; padding: 0.3rem 0; font-size: 0.9rem; }
+  .bars .b { height: 8px; background: var(--bg-soft); border-radius: 4px; overflow: hidden; }
+  .bars i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+  .bars .n { text-align: right; font-family: var(--mono); color: var(--ink-soft); }
+  .drills { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.2rem 2rem; }
+  .drills li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid var(--line); }
+  .drills a { text-decoration: none; color: var(--ink-faint); }
+  .drills li.done a { color: var(--ink); }
+  .drills .no { font-family: var(--mono); color: var(--accent); font-size: 0.85em; }
+</style>

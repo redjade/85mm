@@ -1,0 +1,24 @@
+---
+import Page from '../../layouts/Page.astro';
+import { u, getLearn } from '../../lib/site';
+const learn = await getLearn();
+---
+
+<Page title="배우기" eyebrow="85mm의 성질과 보는 법" lede="숫자로 이해하고, 영상과 글에서 배운 것을 내 말로 옮긴다. 순서대로 읽으면 좋다.">
+  <div slot="after" class="grid list">
+    {
+      learn.map((l) => (
+        <a class="card" href={u(`/learn/${l.id}/`)}>
+          <span class="no">{String(l.data.order).padStart(2, '0')}</span>
+          <h3>{l.data.title}</h3>
+          <p>{l.data.summary}</p>
+          <ul class="tags">{l.data.elements.map((e) => <li class="tag el">{e}</li>)}</ul>
+        </a>
+      ))
+    }
+  </div>
+</Page>
+
+<style>
+  .list { margin-top: 1rem; }
+</style>

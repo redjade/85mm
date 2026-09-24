@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+# 원본 사진은 저장소에 넣지 않는다 — tools/add_photo.py가 웹용 사본만 만든다
+originals/
+*.ARW
+*.CR3
+*.NEF
+*.RAF
+*.DNG

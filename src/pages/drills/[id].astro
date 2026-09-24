@@ -1,0 +1,61 @@
+---
+import { render } from 'astro:content';
+import Page from '../../layouts/Page.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import { u, getDrills, getPhotos, drillNo, DISTANCE_LABEL } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const drills = await getDrills();
+  return drills.map((entry, i) => ({
+    params: { id: entry.id },
+    props: { entry, prev: drills[i - 1], next: drills[i + 1] },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const photos = (await getPhotos()).filter((p) => p.data.drill?.id === entry.id);
+---
+
+<Page title={d.title} eyebrow={`연습 ${drillNo(d.no)} · ${d.time}`}>
+  <dl class="spec">
+    <div><dt>과제</dt><dd>{d.task}</dd></div>
+    <div><dt>제약</dt><dd>{d.constraint}</dd></div>
+    <div>
+      <dt>끝나고 묻기</dt>
+      <dd><ul>{d.questions.map((q) => <li>{q}</li>)}</ul></dd>
+    </div>
+  </dl>
+  <ul class="tags">
+    {d.distance.map((x) => <li class="tag">{DISTANCE_LABEL[x]}</li>)}
+    {d.elements.map((e) => <li class="tag el">{e}</li>)}
+  </ul>
+  <Content />
+
+  <div slot="after" class="after">
+    <h2>이 연습으로 찍은 사진</h2>
+    {
+      photos.length ? (
+        <PhotoGrid photos={photos} />
+      ) : (
+        <p class="empty">아직 없다. 사진을 올릴 때 <code>drill: {entry.id}</code>를 붙이면 여기에 모인다.</p>
+      )
+    }
+    <nav class="pager small">
+      {prev ? <a href={u(`/drills/${prev.id}/`)}>← {drillNo(prev.data.no)} {prev.data.title}</a> : <span />}
+      {next ? <a href={u(`/drills/${next.id}/`)}>{drillNo(next.data.no)} {next.data.title} →</a> : <span />}
+    </nav>
+  </div>
+</Page>
+
+<style>
+  .spec { margin: 0 0 1.2rem; border-top: 1px solid var(--line); }
+  .spec > div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+  .spec dt { color: var(--ink-faint); font-size: 0.88rem; padding-top: 0.15rem; }
+  .spec dd { margin: 0; }
+  .spec ul { margin: 0; padding-left: 1.1rem; }
+  @media (max-width: 520px) { .spec > div { grid-template-columns: 1fr; gap: 0.2rem; } }
+  .after { margin-top: 1rem; }
+  .pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+</style>

@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { u } from '../lib/site';
+
+interface Props {
+  photos: CollectionEntry<'photos'>[];
+  filterable?: boolean;
+}
+const { photos, filterable = false } = Astro.props;
+---
+
+<div class="photo-grid">
+  {
+    photos.map((p) => (
+      <a
+        href={u(`/photos/${p.id}/`)}
+        title={p.data.title}
+        data-elements={filterable ? p.data.elements.join(' ') : undefined}
+        data-distance={filterable ? p.data.distance : undefined}
+      >
+        <Image src={p.data.image} alt={p.data.alt} width={480} loading="lazy" />
+      </a>
+    ))
+  }
+</div>

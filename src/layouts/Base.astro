@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import { u } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = '85mm 렌즈 하나로 보는 법을 다시 배우는 개인 연습장.' } = Astro.props;
+const fullTitle = title ? `${title} · 85mm` : '85mm';
+const path = Astro.url.pathname;
+
+const nav = [
+  { href: u('/start/'), label: '시작하며' },
+  { href: u('/learn/'), label: '배우기' },
+  { href: u('/drills/'), label: '연습' },
+  { href: u('/photos/'), label: '기록' },
+  { href: u('/trace/'), label: '궤적' },
+];
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href={u('/favicon.svg').replace(/\/$/, '')} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href={u('/')}>85<span>mm</span></a>
+        <nav aria-label="주 메뉴">
+          {
+            nav.map((n) => (
+              <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>
+                {n.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>풀프레임 · 85mm f/1.8 한 개로 하는 연습. 사진가가 아닌 사람의 공부 노트.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 3.4rem;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .brand span { color: var(--accent); font-size: 0.8em; margin-left: 1px; }
+  nav { display: flex; gap: 1.1rem; flex-wrap: wrap; font-size: 0.93rem; }
+  nav a { text-decoration: none; color: var(--ink-soft); padding: 0.3rem 0; }
+  nav a[aria-current='page'] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+  main { padding: 3rem 0 5rem; min-height: 70vh; }
+  .site-footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; font-size: 0.85rem; color: var(--ink-faint); }
+  .site-footer p { margin: 0; }
+  @media (max-width: 520px) {
+    .bar { padding-top: 0.5rem; padding-bottom: 0.4rem; }
+    nav { gap: 0.9rem; font-size: 0.9rem; }
+  }
+</style>

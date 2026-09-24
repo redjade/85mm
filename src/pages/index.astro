@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import { u, getPhotos, getDrills, getLearn, drillNo } from '../lib/site';
+
+const photos = await getPhotos();
+const drills = await getDrills();
+const learn = await getLearn();
+const tried = new Set(photos.map((p) => p.data.drill?.id).filter(Boolean));
+const nextDrill = drills.find((d) => !tried.has(d.id)) ?? drills[0];
+const since = new Date('2026-01-01');
+const days = Math.floor((Date.now() - since.getTime()) / 86400000);
+---
+
+<Base>
+  <div class="wrap">
+    <section class="hero measure">
+      <p class="eyebrow">풀프레임 · 85mm f/1.8 · 2026년 1월부터</p>
+      <h1>85mm로 다시 배우는 보는 법</h1>
+      <p class="lede">
+        35mm는 장면을 담았다. 85mm는 집중하게 만들고, 내가 어디를 보는지 숨길 수 없게 만든다. 사람도 풍경도 이 렌즈 하나로
+        찍으면서 배우고 연습하고 기록하는 곳.
+      </p>
+      <p class="stats small muted">
+        85mm만 쓴 지 {days}일 · 기록한 사진 {photos.length}장 · 해 본 연습 {tried.size}/{drills.length}
+      </p>
+    </section>
+
+    <section>
+      <div class="head">
+        <h2>최근 기록</h2>
+        <a class="small" href={u('/photos/')}>모두 보기 →</a>
+      </div>
+      {
+        photos.length ? (
+          <PhotoGrid photos={photos.slice(0, 8)} />
+        ) : (
+          <p class="empty">아직 올린 사진이 없다. 첫 사진은 <a href={u(`/drills/${nextDrill.id}/`)}>연습 {drillNo(nextDrill.data.no)}</a>로 찍어 보면 어떨까.</p>
+        )
+      }
+    </section>
+
+    <section>
+      <div class="head">
+        <h2>다음 연습</h2>
+        <a class="small" href={u('/drills/')}>연습 전체 →</a>
+      </div>
+      <a class="card next" href={u(`/drills/${nextDrill.id}/`)}>
+        <span class="no">연습 {drillNo(nextDrill.data.no)} · {nextDrill.data.time}</span>
+        <h3>{nextDrill.data.title}</h3>
+        <p>{nextDrill.data.task}</p>
+        <p class="small muted">제약: {nextDrill.data.constraint}</p>
+      </a>
+    </section>
+
+    <section>
+      <div class="head">
+        <h2>배우기</h2>
+        <a class="small" href={u('/learn/')}>전체 →</a>
+      </div>
+      <ol class="toc">
+        {
+          learn.map((l) => (
+            <li>
+              <a href={u(`/learn/${l.id}/`)}>{l.data.title}</a>
+              <span class="muted small"> {l.data.summary}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .hero { margin-bottom: 3.5rem; }
+  .stats { font-family: var(--mono); }
+  .head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .head h2 { margin-top: 0; }
+  .next { max-width: var(--measure); }
+  .toc { padding-left: 1.3rem; max-width: 48rem; }
+  .toc li { margin-bottom: 0.6rem; line-height: 1.55; }
+  .toc a { font-weight: 550; }
+</style>

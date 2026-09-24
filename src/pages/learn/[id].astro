@@ -1,0 +1,48 @@
+---
+import { render } from 'astro:content';
+import Page from '../../layouts/Page.astro';
+import DofCalc from '../../components/DofCalc.astro';
+import FramesDiagram from '../../components/FramesDiagram.astro';
+import { u, getLearn } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const learn = await getLearn();
+  return learn.map((entry, i) => ({
+    params: { id: entry.id },
+    props: { entry, prev: learn[i - 1], next: learn[i + 1] },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Page title={entry.data.title} eyebrow={`배우기 ${String(entry.data.order).padStart(2, '0')}`} lede={entry.data.summary}>
+  <ul class="tags top">{entry.data.elements.map((e) => <li class="tag el">{e}</li>)}</ul>
+  {entry.data.widget === 'frames' && <FramesDiagram />}
+  <Content />
+  {entry.data.widget === 'dof' && <DofCalc />}
+  {
+    entry.data.sources.length > 0 && (
+      <>
+        <h2>참고</h2>
+        <ul class="small">
+          {entry.data.sources.map((s) => (
+            <li>
+              <a href={s.url} rel="noopener">{s.label}</a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+  <nav slot="after" class="pager measure small">
+    {prev ? <a href={u(`/learn/${prev.id}/`)}>← {prev.data.title}</a> : <span />}
+    {next ? <a href={u(`/learn/${next.id}/`)}>{next.data.title} →</a> : <a href={u('/drills/')}>연습하러 가기 →</a>}
+  </nav>
+</Page>
+
+<style>
+  .top { margin-bottom: 1rem; }
+  .pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+</style>

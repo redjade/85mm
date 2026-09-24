@@ -1,0 +1,138 @@
+:root {
+  --bg: #f6f4ef;
+  --bg-soft: #ece9e1;
+  --ink: #1d1c1a;
+  --ink-soft: #5a5750;
+  --ink-faint: #8d897f;
+  --line: #d9d5ca;
+  --accent: #a2561b; /* 해 질 녘의 빛 */
+  --accent-soft: #f1e2d2;
+  --photo-bg: #111110;
+  --serif: 'Noto Serif KR', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Pretendard Variable', Pretendard, -apple-system, 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --measure: 40rem;
+  --wide: 72rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141412;
+    --bg-soft: #1e1d1a;
+    --ink: #ebe8e1;
+    --ink-soft: #b3aea3;
+    --ink-faint: #7e7a71;
+    --line: #34322d;
+    --accent: #e0995a;
+    --accent-soft: #3a2a1c;
+    --photo-bg: #0b0b0a;
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 0.2em; }
+a:hover { text-decoration-color: var(--accent); color: var(--accent); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; }
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0 0 0.5rem; }
+h2 { font-size: 1.45rem; margin: 2.8rem 0 0.8rem; }
+h3 { font-size: 1.15rem; margin: 2rem 0 0.5rem; }
+
+.wrap { max-width: var(--wide); margin: 0 auto; padding: 0 16px; }
+.measure { max-width: var(--measure); }
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+  margin: 0 0 0.6rem;
+}
+.lede { font-size: 1.15rem; color: var(--ink-soft); margin: 0 0 2rem; }
+.muted { color: var(--ink-faint); }
+.small { font-size: 0.88rem; }
+
+/* 본문(마크다운) */
+.prose p, .prose li { color: var(--ink); }
+.prose blockquote {
+  margin: 1.6rem 0;
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  border-left: 2px solid var(--accent);
+  color: var(--ink-soft);
+  font-family: var(--serif);
+}
+.prose table { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin: 1.2rem 0; display: block; overflow-x: auto; }
+.prose th, .prose td { text-align: left; padding: 0.45rem 0.8rem 0.45rem 0; border-bottom: 1px solid var(--line); vertical-align: top; white-space: nowrap; }
+.prose td:last-child, .prose th:last-child { white-space: normal; }
+.prose th { color: var(--ink-faint); font-weight: 500; }
+.prose code { font-family: var(--mono); font-size: 0.88em; background: var(--bg-soft); padding: 0.1em 0.35em; border-radius: 3px; }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+.prose strong { font-weight: 650; }
+
+/* 태그 */
+.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0; margin: 0; list-style: none; }
+.tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  line-height: 1;
+  padding: 0.38rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  background: transparent;
+  font-family: inherit;
+}
+.tag.el { border-color: var(--accent-soft); background: var(--accent-soft); color: var(--ink); }
+button.tag { cursor: pointer; }
+button.tag[aria-pressed='true'] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* 카드 그리드 */
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); }
+.card {
+  display: block;
+  padding: 1.2rem 1.2rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-decoration: none;
+  background: var(--bg);
+  transition: border-color 0.15s;
+}
+.card:hover { border-color: var(--accent); color: inherit; }
+.card h3 { margin: 0.2rem 0 0.4rem; }
+.card p { margin: 0 0 0.8rem; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.6; }
+.card .no { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); }
+
+/* 사진 그리드 */
+.photo-grid { display: grid; gap: 6px; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); }
+.photo-grid a { display: block; aspect-ratio: 3 / 2; overflow: hidden; background: var(--photo-bg); }
+.photo-grid img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; }
+.photo-grid a:hover img { opacity: 0.85; }
+
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  padding: 2rem 1.2rem;
+  color: var(--ink-faint);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+section + section { margin-top: 3.5rem; }
