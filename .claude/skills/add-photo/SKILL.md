@@ -14,7 +14,7 @@ uv run python tools/add_photo.py <파일 또는 폴더...> [--drill <연습 id>]
 ```
 
 - 먼저 `--dry-run`으로 몇 장이 들어가는지, 날짜와 EXIF가 제대로 읽히는지 보여 준다.
-- 사용자가 연습 번호를 말했으면 `--drill`로 넘긴다. 연습 id는 `src/content/drills/*.md`의 파일 이름이다(예: `07-layers`).
+- 사용자가 연습 번호를 말했으면 `--drill`로 넘긴다. 연습 id는 `src/content/drills/*.md`의 파일 이름이다(예: `layers`).
 - 출력은 한 줄에 사진 한 장씩 JSON이다. `status`가 `skip`(이미 올린 사진)이나 `error`인 것은 사용자에게 알려 준다.
 - RAW(ARW, CR3, NEF…)는 받지 않는다. 사용자에게 JPEG로 내보내 달라고 한다. HEIC는 `uv pip install pillow-heif` 뒤에 받는다.
 - 파이프라인이 의심스러우면 `uv run python tools/add_photo.py --selftest`로 확인한다.

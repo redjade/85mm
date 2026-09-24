@@ -1,6 +1,6 @@
 ---
 title: 사람 곁의 85mm
-order: 7
+order: 9
 summary: 대화 거리에서 사람을 본다. 한 사람과 두 사람, 군중 속 한 사람. 가까이 가지 않아도 되는 거리가 주는 것.
 elements: [이야기, 빛, 생략]
 sources:

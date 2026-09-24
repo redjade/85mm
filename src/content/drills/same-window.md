@@ -1,5 +1,7 @@
 ---
-no: 11
+no: 17
+stage: 6
+read: [landscape, light]
 title: 같은 창, 매일
 task: 같은 자리(창, 베란다, 출근길 한 지점)에서 같은 먼 풍경을 7일 동안 매일 한 장씩 찍는다.
 constraint: 자리와 프레임은 같게. 시간은 달라도 된다.

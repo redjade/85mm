@@ -1,5 +1,7 @@
 ---
-no: 6
+no: 8
+stage: 3
+read: [composition]
 title: 여백 절반
 task: 화면의 절반 이상이 비어 있는 사진 다섯 장. 하늘, 벽, 흐린 배경, 그림자, 물.
 constraint: 피사체는 프레임 면적의 10%를 넘지 않는다.

@@ -1,6 +1,6 @@
 """원본 사진 → 웹용 사본 + 기록 초안(index.md).
 
-    uv run python tools/add_photo.py <파일 또는 폴더...> [--drill 07-layers] [--dry-run]
+    uv run python tools/add_photo.py <파일 또는 폴더...> [--drill layers] [--dry-run]
     uv run python tools/add_photo.py --drafts      # 메모가 비어 있는 초안 목록
     uv run python tools/add_photo.py --selftest    # 파이프라인 회귀 검증
 
@@ -264,14 +264,14 @@ def selftest() -> None:
         root = tmp / "photos"
         root.mkdir()
         seen: dict[str, str] = {}
-        r = process(src, root, "07-layers", seen, dry=False, long_edge=LONG_EDGE)
+        r = process(src, root, "layers", seen, dry=False, long_edge=LONG_EDGE)
         assert r["status"] == "added", r
         assert r["id"] == "2026-03-14-dsc01234", r["id"]
         assert r["size"] == [1600, 2400], f"회전/축소 실패: {r['size']}"
         assert r["exif"] == {"fnumber": 1.8, "shutter": "1/250", "iso": 400, "focal": 85, "camera": "SONY ILCE-7M4", "lens": "FE 85mm F1.8"}, r["exif"]
         assert_clean(Path(r["photo"]))
         md = Path(r["md"]).read_text(encoding="utf-8")
-        for needle in ("draft: true", "drill: 07-layers", "fnumber: 1.8", 'shutter: "1/250"', "date: 2026-03-14T17:42:05"):
+        for needle in ("draft: true", "drill: layers", "fnumber: 1.8", 'shutter: "1/250"', "date: 2026-03-14T17:42:05"):
             assert needle in md, f"frontmatter에 {needle!r} 없음"
 
         again = process(src, root, None, existing_hashes(root), dry=False, long_edge=LONG_EDGE)
@@ -291,7 +291,7 @@ def main() -> None:
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("paths", nargs="*")
-    ap.add_argument("--drill", help="연습 id (예: 07-layers)")
+    ap.add_argument("--drill", help="연습 id (예: layers)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--long-edge", type=int, default=LONG_EDGE)
     ap.add_argument("--drafts", action="store_true")

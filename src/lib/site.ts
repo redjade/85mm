@@ -21,6 +21,22 @@ export const DISTANCE_HINT = {
   far: '20m–∞ · 겹, 공기, 먼 빛',
 } as const;
 
+// 연습의 흐름. 1~6은 차례로, 7은 늘 되풀이한다.
+export const STAGES: Record<number, { title: string; desc: string }> = {
+  1: { title: '눈 바꾸기', desc: '35mm의 눈에서 85mm의 눈으로. 거리와 화각을 몸으로 익힌다.' },
+  2: { title: '초점과 조리개', desc: '얕은 심도를 다룬다. 무엇을 선명하게, 무엇을 흐리게 둘지.' },
+  3: { title: '프레임', desc: '넣고 빼기. 가운데와 비켜서기, 여백, 겹.' },
+  4: { title: '빛과 색', desc: '피사체보다 빛과 색을 먼저 본다. 찍을 때와 보정할 때 모두.' },
+  5: { title: '멀리, 그리고 사람 사이', desc: '풍경의 겹과 공기, 군중 속 한 사람.' },
+  6: { title: '머물기', desc: '시간을 들여 한 곳을 오래 본다.' },
+  7: { title: '늘 하는 연습', desc: '순서와 상관없이 되풀이한다. 나갔다 올 때마다, 한 주마다, 한 달마다.' },
+};
+export const ALWAYS_STAGE = 7;
+
+export function stageLabel(n: number): string {
+  return n === ALWAYS_STAGE ? STAGES[n].title : `${n}단계 · ${STAGES[n].title}`;
+}
+
 export const MOOD_LABEL = ['', '고요', '잔잔', '중간', '들뜸', '흥분'] as const;
 
 export async function getPhotos(): Promise<CollectionEntry<'photos'>[]> {

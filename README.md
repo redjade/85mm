@@ -13,7 +13,7 @@ https://redjade.github.io/85mm/
 
 ```bash
 uv run python tools/add_photo.py ~/Pictures/export/          # 웹용 사본 + 초안
-uv run python tools/add_photo.py photo.jpg --drill 07-layers  # 연습에 연결
+uv run python tools/add_photo.py photo.jpg --drill layers  # 연습에 연결
 uv run python tools/add_photo.py --drafts                     # 메모를 아직 안 채운 초안
 uv run python tools/add_photo.py --selftest                   # 파이프라인 검증
 ```

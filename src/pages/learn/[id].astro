@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import Page from '../../layouts/Page.astro';
 import DofCalc from '../../components/DofCalc.astro';
 import FramesDiagram from '../../components/FramesDiagram.astro';
-import { u, getLearn } from '../../lib/site';
+import { u, getLearn, getDrills, drillNo } from '../../lib/site';
 
 export async function getStaticPaths() {
   const learn = await getLearn();
@@ -15,6 +15,7 @@ export async function getStaticPaths() {
 
 const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
+const drills = (await getDrills()).filter((d) => d.data.read.some((r) => r.id === entry.id));
 ---
 
 <Page title={entry.data.title} eyebrow={`배우기 ${String(entry.data.order).padStart(2, '0')}`} lede={entry.data.summary}>
@@ -22,6 +23,23 @@ const { Content } = await render(entry);
   {entry.data.widget === 'frames' && <FramesDiagram />}
   <Content />
   {entry.data.widget === 'dof' && <DofCalc />}
+  {
+    drills.length > 0 && (
+      <>
+        <h2>이어지는 연습</h2>
+        <ul>
+          {drills.map((d) => (
+            <li>
+              <a href={u(`/drills/${d.id}/`)}>
+                {drillNo(d.data.no)} {d.data.title}
+              </a>
+              <span class="muted"> · {d.data.task}</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
   {
     entry.data.sources.length > 0 && (
       <>

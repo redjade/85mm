@@ -1,13 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import PhotoGrid from '../components/PhotoGrid.astro';
-import { u, getPhotos, getDrills, getLearn, drillNo } from '../lib/site';
+import { u, getPhotos, getDrills, getLearn, drillNo, stageLabel, ALWAYS_STAGE } from '../lib/site';
 
 const photos = await getPhotos();
 const drills = await getDrills();
 const learn = await getLearn();
 const tried = new Set(photos.map((p) => p.data.drill?.id).filter(Boolean));
-const nextDrill = drills.find((d) => !tried.has(d.id)) ?? drills[0];
+const nextDrill = drills.find((d) => d.data.stage !== ALWAYS_STAGE && !tried.has(d.id)) ?? drills[0];
 ---
 
 <Base>
@@ -44,7 +44,7 @@ const nextDrill = drills.find((d) => !tried.has(d.id)) ?? drills[0];
         <a class="small" href={u('/drills/')}>연습 전체 →</a>
       </div>
       <a class="card next" href={u(`/drills/${nextDrill.id}/`)}>
-        <span class="no">연습 {drillNo(nextDrill.data.no)} · {nextDrill.data.time}</span>
+        <span class="no">연습 {drillNo(nextDrill.data.no)} · {stageLabel(nextDrill.data.stage)} · {nextDrill.data.time}</span>
         <h3>{nextDrill.data.title}</h3>
         <p>{nextDrill.data.task}</p>
         <p class="small muted">제약: {nextDrill.data.constraint}</p>

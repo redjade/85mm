@@ -1,5 +1,7 @@
 ---
-no: 3
+no: 6
+stage: 3
+read: [seeing, composition]
 title: 생략 사다리
 task: 한 장면을 다섯 장 찍는다. 한 장마다 프레임에서 요소를 하나씩 뺀다.
 constraint: 다섯 번째 장에는 요소가 한두 개만 남아야 한다.

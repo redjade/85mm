@@ -28,6 +28,8 @@ const drills = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/drills' }),
   schema: z.object({
     no: z.number(),
+    stage: z.number().int().min(1).max(7), // 7 = 순서와 상관없이 늘 하는 연습
+    read: z.array(reference('learn')).default([]), // 먼저 읽을 글
     title: z.string(),
     task: z.string(),
     constraint: z.string(),

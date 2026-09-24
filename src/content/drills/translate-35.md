@@ -1,5 +1,7 @@
 ---
-no: 2
+no: 1
+stage: 1
+read: [seeing]
 title: 35mm 번역
 task: 평소 35mm로 찍었을 장면 하나 앞에 서서, 그 안에서 85mm 사진 세 장을 찾는다.
 constraint: 세 장은 서로 다른 것이어야 한다. 휴대폰(광각)으로 전체 장면도 한 장 남긴다.

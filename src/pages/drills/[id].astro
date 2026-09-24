@@ -1,8 +1,8 @@
 ---
-import { render } from 'astro:content';
+import { render, getEntries } from 'astro:content';
 import Page from '../../layouts/Page.astro';
 import PhotoGrid from '../../components/PhotoGrid.astro';
-import { u, getDrills, getPhotos, drillNo, DISTANCE_LABEL } from '../../lib/site';
+import { u, getDrills, getPhotos, drillNo, stageLabel, DISTANCE_LABEL } from '../../lib/site';
 
 export async function getStaticPaths() {
   const drills = await getDrills();
@@ -16,9 +16,10 @@ const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const photos = (await getPhotos()).filter((p) => p.data.drill?.id === entry.id);
+const reads = await getEntries(d.read);
 ---
 
-<Page title={d.title} eyebrow={`연습 ${drillNo(d.no)} · ${d.time}`}>
+<Page title={d.title} eyebrow={`연습 ${drillNo(d.no)} · ${stageLabel(d.stage)} · ${d.time}`}>
   <dl class="spec">
     <div><dt>과제</dt><dd>{d.task}</dd></div>
     <div><dt>제약</dt><dd>{d.constraint}</dd></div>
@@ -26,6 +27,21 @@ const photos = (await getPhotos()).filter((p) => p.data.drill?.id === entry.id);
       <dt>끝나고 묻기</dt>
       <dd><ul>{d.questions.map((q) => <li>{q}</li>)}</ul></dd>
     </div>
+    {
+      reads.length > 0 && (
+        <div>
+          <dt>먼저 읽기</dt>
+          <dd>
+            {reads.map((l, i) => (
+              <>
+                {i > 0 && ' · '}
+                <a href={u(`/learn/${l.id}/`)}>{l.data.title}</a>
+              </>
+            ))}
+          </dd>
+        </div>
+      )
+    }
   </dl>
   <ul class="tags">
     {d.distance.map((x) => <li class="tag">{DISTANCE_LABEL[x]}</li>)}

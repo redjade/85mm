@@ -1,6 +1,6 @@
 ---
 title: 두 영상에서 배운 것
-order: 8
+order: 12
 summary: Victor Laforteza의 85mm 구도 강의와 PetaPixel Chris Niccolls의 85mm 거리 스냅. 제품 이야기는 빼고 보는 법만.
 elements: [생략, 빛, 이야기]
 sources:
@@ -25,7 +25,7 @@ sources:
 - **빛도 프레이밍하라.** 부드러운 하이라이트 롤오프가 시선을 피사체로 이끈다.
 - 과제: 나가서 프레이밍을 실험하고, 움직이고, 빛과 놀아 보라. 렌즈 하나가 구도를 얼마나 바꾸는지 보라.
 
-→ 이 연습장의 [프레임은 결정이다](/85mm/learn/04-composition/), [빛을 프레이밍하기](/85mm/learn/05-light/), 연습 [05](/85mm/drills/05-center-off/) · [06](/85mm/drills/06-half-empty/) · [07](/85mm/drills/07-layers/) · [08](/85mm/drills/08-only-light/)로 이어진다.
+→ 이 연습장의 [프레임은 결정이다](/85mm/learn/composition/), [빛을 프레이밍하기](/85mm/learn/light/), 연습 [07](/85mm/drills/center-off/) · [08](/85mm/drills/half-empty/) · [09](/85mm/drills/layers/) · [10](/85mm/drills/only-light/)로 이어진다.
 
 ## Chris Niccolls (PetaPixel): 나는 세상을 85mm로 본다
 
@@ -36,4 +36,4 @@ sources:
 - 보케: 개방에서는 고양이 눈 같은 가장자리 보케, f/2.8에서는 둥근 보케. **보케의 모양도 고를 수 있다.**
 - 해 질 녘 역광 인물(빨간 머리카락이 림 라이트를 받는다). 보통은 플레어를 억제하는 렌즈를 좋아하지만, **역광 인물에서는 베일 같은 플레어와 고스트가 따뜻함과 흥미를 더한다.**
 
-→ [사람 곁의 85mm](/85mm/learn/07-people/), 연습 [12 군중 속 한 사람](/85mm/drills/12-one-in-crowd/)으로 이어진다.
+→ [사람 곁의 85mm](/85mm/learn/people/), 연습 [15 군중 속 한 사람](/85mm/drills/one-in-crowd/)으로 이어진다.

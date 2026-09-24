@@ -1,5 +1,7 @@
 ---
-no: 1
+no: 2
+stage: 1
+read: [distance]
 title: 한 걸음의 차이
 task: 한 대상을 정하고 2m, 4m, 8m, 16m, 32m에서 한 장씩 찍는다.
 constraint: 대상과 조리개는 바꾸지 않는다. 나만 움직인다.
