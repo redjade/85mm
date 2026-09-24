@@ -8,17 +8,15 @@ const drills = await getDrills();
 const learn = await getLearn();
 const tried = new Set(photos.map((p) => p.data.drill?.id).filter(Boolean));
 const nextDrill = drills.find((d) => !tried.has(d.id)) ?? drills[0];
-const since = new Date('2026-01-01');
-const days = Math.floor((Date.now() - since.getTime()) / 86400000);
 ---
 
 <Base>
   <div class="wrap">
     <section class="hero measure">
-      <p class="eyebrow">풀프레임 · 85mm f/1.8 · 2026년 1월부터</p>
+      <p class="eyebrow">풀프레임 · 85mm f/1.8 · 2025년 겨울부터</p>
       <h1>85mm 연습 노트</h1>
       <p class="lede">
-        35mm는 장면과 전체를 담았던 것 같다. 85mm는 집중하게 만들고, 내가 어디를 보는지 숨길 수 없게 만든다. 사람도 풍경도 이 렌즈 하나로
+        35mm로는 장면 전체를 담았던 것 같다. 85mm는 집중하게 만들고, 내가 어디를 보는지 숨길 수 없게 만든다. 사람도 풍경도 이 렌즈 하나로
         찍으면서 배우고 연습하고 기록하는 곳.
       </p>
       <p class="stats small muted">
