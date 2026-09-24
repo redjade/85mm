@@ -121,7 +121,7 @@ const drillCounts = drills.map((d) => ({ d, n: photos.filter((p) => p.data.drill
         </ul>
       </section>
       <section>
-        <h2>여섯 가지 말</h2>
+        <h2>여섯 개의 단어</h2>
         <ul class="bars">
           {
             elCounts.map((x) => (
@@ -161,7 +161,7 @@ const drillCounts = drills.map((d) => ({ d, n: photos.filter((p) => p.data.drill
   .map { display: grid; grid-template-columns: 8.5rem repeat(5, minmax(0, 1fr)); gap: 4px; }
   .colh { text-align: center; padding-bottom: 0.2rem; }
   .rowh { display: flex; flex-direction: column; justify-content: center; line-height: 1.35; padding-right: 0.5rem; }
-  .rowh .small { font-size: 0.72rem; }
+  .rowh .small { font-size: 0.875rem; }
   .cell {
     min-height: 6.5rem;
     border-radius: 4px;
@@ -179,8 +179,8 @@ const drillCounts = drills.map((d) => ({ d, n: photos.filter((p) => p.data.drill
   @media (max-width: 620px) {
     .map { grid-template-columns: 4.2rem repeat(5, minmax(0, 1fr)); }
     .rowh .small { display: none; }
-    .rowh strong { font-size: 0.8rem; }
-    .colh { font-size: 0.72rem; }
+    .rowh strong { font-size: 0.875rem; }
+    .colh { font-size: 0.8125rem; }
     .cell { min-height: 4rem; grid-template-columns: 1fr; }
   }
   .month { margin-bottom: 1.2rem; }
@@ -191,7 +191,7 @@ const drillCounts = drills.map((d) => ({ d, n: photos.filter((p) => p.data.drill
   .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 0 3rem; margin-top: 3.5rem; }
   .two section + section { margin-top: 0; }
   .bars { list-style: none; padding: 0; margin: 0; }
-  .bars li { display: grid; grid-template-columns: 6.5rem 1fr 2rem; align-items: center; gap: 0.6rem; padding: 0.3rem 0; font-size: 0.9rem; }
+  .bars li { display: grid; grid-template-columns: 6.5rem 1fr 2rem; align-items: center; gap: 0.6rem; padding: 0.3rem 0; font-size: 1rem; }
   .bars .b { height: 8px; background: var(--bg-soft); border-radius: 4px; overflow: hidden; }
   .bars i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
   .bars .n { text-align: right; font-family: var(--mono); color: var(--ink-soft); }

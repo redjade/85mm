@@ -18,11 +18,11 @@ const days = Math.floor((Date.now() - since.getTime()) / 86400000);
       <p class="eyebrow">풀프레임 · 85mm f/1.8 · 2026년 1월부터</p>
       <h1>85mm 연습 노트</h1>
       <p class="lede">
-        35mm는 장면을 담았다. 85mm는 집중하게 만들고, 내가 어디를 보는지 숨길 수 없게 만든다. 사람도 풍경도 이 렌즈 하나로
+        35mm는 장면과 전체를 담았던 것 같다. 85mm는 집중하게 만들고, 내가 어디를 보는지 숨길 수 없게 만든다. 사람도 풍경도 이 렌즈 하나로
         찍으면서 배우고 연습하고 기록하는 곳.
       </p>
       <p class="stats small muted">
-        85mm만 쓴 지 {days}일 · 기록한 사진 {photos.length}장 · 해 본 연습 {tried.size}/{drills.length}
+        기록한 사진 {photos.length}장 · 해 본 연습 {tried.size}/{drills.length}
       </p>
     </section>
 
@@ -35,7 +35,7 @@ const days = Math.floor((Date.now() - since.getTime()) / 86400000);
         photos.length ? (
           <PhotoGrid photos={photos.slice(0, 8)} />
         ) : (
-          <p class="empty">아직 올린 사진이 없다. 첫 사진은 <a href={u(`/drills/${nextDrill.id}/`)}>연습 {drillNo(nextDrill.data.no)}</a>로 찍어 보면 어떨까.</p>
+          <p class="empty">아직 올린 사진이 없다. 아마 첫 사진은 <a href={u(`/drills/${nextDrill.id}/`)}>연습 {drillNo(nextDrill.data.no)}</a>로 시작할 듯.</p>
         )
       }
     </section>
@@ -74,7 +74,7 @@ const days = Math.floor((Date.now() - since.getTime()) / 86400000);
 
 <style>
   .hero { margin-bottom: 3.5rem; }
-  .stats { font-family: var(--mono); }
+  .stats { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
   .head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
   .head h2 { margin-top: 0; }
   .next { max-width: var(--measure); }

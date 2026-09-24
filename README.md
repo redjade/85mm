@@ -7,7 +7,7 @@ https://redjade.github.io/85mm/
 - **배우기**: 85mm의 성질과 보는 법 (`src/content/learn/`)
 - **연습**: 제약이 있는 과제 카드 (`src/content/drills/`)
 - **기록**: 찍은 사진과 두 줄 메모 (`src/content/photos/<id>/`)
-- **궤적**: 거리 × 분위기 지도, 달마다, 조리개, 여섯 가지 말
+- **궤적**: 거리 × 분위기 지도, 달마다, 조리개, 여섯 개의 단어
 
 ## 사진 올리기
 
