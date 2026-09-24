@@ -4,10 +4,15 @@ order: 6
 summary: 피사체만 프레이밍하지 말고 빛도 프레이밍한다. 하이라이트가 녹아드는 방식, 역광, 플레어, 먼 곳의 빛 한 조각.
 elements: [빛, 대비, 색, 공기]
 sources:
-  - label: "Victor Laforteza — The 85mm is not just for portraits (a mini masterclass)"
+  - label: "Victor Laforteza — The 85mm is not just for portraits (a mini masterclass) · 협찬 Viltrox"
     url: https://www.youtube.com/watch?v=i8-1ZBxfK_U
-  - label: "PetaPixel — I See the World in 85mm"
+    kind: video
+  - label: "PetaPixel (Chris Niccolls) — I See the World in 85mm · 협찬 Meike"
     url: https://www.youtube.com/watch?v=zCawCukueDA
+    kind: video
+  - label: "Simon Burn — My Street Photography Changed Once I Tried 85mm"
+    url: https://www.youtube.com/watch?v=Qf9S_UIDe4U
+    kind: video
 ---
 
 ## 빛도 프레임 안에 넣는다
@@ -37,6 +42,8 @@ sources:
 - **그늘 속 반사광**: 한낮에는 밝은 벽이 반사판이 된다. 그늘 안에 사람을, 밝은 거리를 배경에.
 - **먼 곳의 빛 한 조각**: 흐린 날 구름 틈으로 먼 산이나 건물에 떨어진 빛. 35mm에서는 작은 점이지만 85mm에서는 사진의 주인공이 된다.
 - **빛만 찍기**: 피사체가 없어도 된다. 벽에 떨어진 나뭇잎 그림자, 계단에 걸린 사선의 빛.
+- **불빛의 겹**: Simon Burn은 해 진 뒤 전구 장식을 가까이와 멀리 겹쳐 f/1.4로 찍었다. 가까운 불빛은 큰 빛망울, 먼 불빛은 작은 빛망울이 되어 깊이가 생긴다. 주황 전구와 푸른 저녁 공기가 색 대비를 만든다. 전구 장식 사이로 바 안의 사람을 들여다보기도 했다.
+- **김과 안개**: 낮게 깔린 증기나 안개는 빛을 눈에 보이게 한다. 역광으로 찍으면 공기가 빛의 덩어리가 된다(Simon Burn의 도심 증기 사진).
 
 ## 대비와 색
 

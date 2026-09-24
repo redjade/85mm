@@ -1,5 +1,5 @@
 ---
-no: 6
+no: 9
 stage: 3
 read: [seeing, composition]
 title: 생략 사다리

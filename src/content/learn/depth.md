@@ -4,6 +4,19 @@ order: 3
 summary: f/1.8과 f/4 사이에서 무엇이 달라지나. 한 사람은 f/1.8, 나란히 선 두 사람은 f/2.8~4, 앞뒤로 선 두 사람은 f/5.6 이상.
 elements: [생략, 이야기]
 widget: dof
+sources:
+  - label: "Victor Laforteza — The 85mm is not just for portraits (a mini masterclass) · 협찬 Viltrox"
+    url: https://www.youtube.com/watch?v=i8-1ZBxfK_U
+    kind: video
+  - label: "Martin Castein — Why 85mm Is Misunderstood"
+    url: https://www.youtube.com/watch?v=1_D0ksDGZQA
+    kind: video
+  - label: "Jason Vong — Why I will never shut up about the 85mm · 협찬 Viltrox"
+    url: https://www.youtube.com/watch?v=KUCTo4gyHsw
+    kind: video
+  - label: "PetaPixel (Chris Niccolls) — I See the World in 85mm · 협찬 Meike"
+    url: https://www.youtube.com/watch?v=zCawCukueDA
+    kind: video
 ---
 
 ## f/1.8의 실제 두께
@@ -24,6 +37,7 @@ widget: dof
 - **한 사람**: f/1.8. 초점은 카메라에 가까운 쪽 눈. 1.5m 이내라면 눈과 코끝의 초점이 갈린다는 걸 기억한다.
 - **두 사람이 나란히 (같은 거리)**: f/2\~2.8. 얼굴이 카메라와 같은 거리에 있으면 얇은 심도로도 둘 다 맞는다. 다만 사람은 살짝 앞뒤로 어긋나기 마련이라 f/2.8이 안전하다.
 - **두 사람이 앞뒤로 (30cm 이상 차이)**: 3m 거리에서 30cm를 덮으려면 f/4, 50cm면 f/5.6\~8이 필요하다. 아니면 두 얼굴이 같은 거리에 오도록 내가 자리를 옮긴다. 조리개보다 **위치**가 먼저다.
+- **Martin Castein**은 결혼사진을 찍을 때 두 사람을 주로 **f/2.2**로 찍었다. 85mm의 원근은 갖고 싶지만 f/1.2의 극단적인 얕음까지는 필요 없어서였다. 그래서 f/1.8 렌즈로 충분하다고 말한다.
 - **뒷사람만 흐리게**: 일부러 한 사람에게만 맞추는 것도 이야기가 된다. 누구를 주인공으로 할지의 결정이다.
 
 ## 조리개는 흐림의 양이 아니라 맥락의 양
@@ -34,11 +48,13 @@ Victor Laforteza는 f/1.2\~1.4보다 f/2\~2.8을 더 자주 쓴다고 했다. �
 - **f/2.8\~4**: 배경의 형태가 읽힌다. "어디서" 찍었는지가 사진에 들어온다.
 - **f/5.6\~8**: 풍경, 겹, 거리의 질감. 멀리 있는 것들을 선명하게 포갠다.
 
+Jason Vong도 같은 말을 한다. 뒤의 도시가 사진의 핵심 배경이면 **f/5.6\~8까지 조인다.** 배경이 정말 어지럽고 사람만 중요할 때만 활짝 연다. 조리개를 가장 크게 열 수 있다고 해서 늘 그래야 하는 것은 아니다.
+
 ## 같은 크기로 찍을 때 85mm의 흐림은 35mm의 약 2.4배
 
 같은 사람을 같은 크기로, 같은 조리개로 찍으면 먼 배경이 흐려지는 정도는 초점거리에 비례한다. 85mm f/1.8로 3m에서 찍은 상반신 사진의 먼 배경 흐림은 35mm f/1.8로 같은 크기로 찍었을 때의 약 2.4배다. 그래서 85mm에서는 **f/2.8로 조여도 이미 충분히 흐리다.**
 
-## 보케의 모양 (PetaPixel 노트)
+## 보케의 모양
 
 개방에서는 화면 가장자리의 빛망울이 고양이 눈처럼 찌그러진다. 한 단계 이상 조이면 둥글어진다. 어느 쪽이 좋다가 아니라 **고를 수 있다**는 것이 핵심이다. 가장자리의 찌그러진 보케는 피사체 주변에 소용돌이 같은 긴장을 주고, 둥근 보케는 차분하다.
 

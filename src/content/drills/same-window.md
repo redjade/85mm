@@ -1,5 +1,5 @@
 ---
-no: 17
+no: 21
 stage: 6
 read: [landscape, light]
 title: 같은 창, 매일

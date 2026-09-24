@@ -1,5 +1,5 @@
 ---
-no: 14
+no: 18
 stage: 5
 read: [landscape]
 title: 세로 이어 붙이기

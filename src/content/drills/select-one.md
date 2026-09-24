@@ -1,5 +1,5 @@
 ---
-no: 18
+no: 22
 stage: 7
 read: [selection]
 title: 한 장 고르기

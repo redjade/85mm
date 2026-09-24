@@ -6,10 +6,13 @@ elements: [생략, 이야기]
 sources:
   - label: "Digital Photography School — The Problem With The Focus-Recompose Method"
     url: https://digital-photography-school.com/the-problem-with-the-focus-recompose-method/
+    kind: article
   - label: "Bob Atkins — Focus and Recompose"
     url: https://bobatkins.com/photography/technical/focus_recompose.html
+    kind: article
   - label: "Tamron — Focusing Correctly: The Most Common Focus Mistakes and Practical Solutions"
     url: https://www.tamron.eu/en/newsroom/blog/focusing-correctly-the-most-common-focus-mistakes-and-practical-solutions
+    kind: article
 ---
 
 ## 얼마나 얇은가

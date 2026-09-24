@@ -1,5 +1,5 @@
 ---
-no: 10
+no: 14
 stage: 4
 read: [light]
 title: 빛만 찍기

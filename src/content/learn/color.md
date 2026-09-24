@@ -4,14 +4,21 @@ order: 7
 summary: 색은 옆에 있는 색에 따라 달라 보인다. 85mm에서는 배경이 색의 면이 되니, 배경을 고르는 것이 곧 색을 고르는 일이다. 화이트밸런스, 시간대, 보정의 일관성.
 elements: [색, 빛, 대비]
 sources:
+  - label: "Simon Burn — My Street Photography Changed Once I Tried 85mm"
+    url: https://www.youtube.com/watch?v=Qf9S_UIDe4U
+    kind: video
   - label: "Cambridge in Colour — White Balance (튜토리얼)"
     url: https://www.cambridgeincolour.com/tutorials/white-balance.htm
+    kind: article
   - label: "Cambridge in Colour — Monitor Calibration for Photography"
     url: https://www.cambridgeincolour.com/tutorials/monitor-calibration.htm
+    kind: article
   - label: "Josef Albers — Interaction of Color (Yale University Press)"
     url: https://yalebooks.yale.edu/book/9780300179354/interaction-of-color/
+    kind: book
   - label: "Saul Leiter Foundation — Color photographs"
     url: https://www.saulleiterfoundation.org/color
+    kind: site
 ---
 
 ## 85mm에서 색이 달라지는 이유
@@ -54,6 +61,10 @@ sources:
 - **여러 장을 한 톤으로**: 한 장을 기준으로 만들고 그 설정을 다른 사진에 복사한 뒤 조금씩 맞춘다. 기록 페이지에 나란히 놓였을 때 한 사람의 눈으로 보인다.
 - **채도를 올리기 전에 한 번 더 생각한다.** 색을 키우기보다 색을 줄여서 한 색을 살리는 쪽이 대개 낫다.
 - **모니터**가 너무 파랗거나 밝으면 보정이 틀어진다. 휴대폰과 컴퓨터에서 같은 사진이 많이 다르게 보이면 모니터를 한 번 맞춰 볼 때다.
+
+## 색을 뺄 때
+
+색이 이야기를 돕지 않으면 흑백으로 바꾼다. Simon Burn은 증기 속 남자와 개를 찍은 사진에서 빨간 가방이 **아무 이유 없이** 시선을 빼앗자 흑백으로 바꿨다. 사진의 핵심은 증기가 만든 분위기와 개의 반응이었기 때문이다. **색도 생략할 수 있다.**
 
 ## 색으로 본 사람
 

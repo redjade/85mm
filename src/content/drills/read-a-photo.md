@@ -1,5 +1,5 @@
 ---
-no: 20
+no: 24
 stage: 7
 read: [reading]
 title: 한 장 따라 읽기

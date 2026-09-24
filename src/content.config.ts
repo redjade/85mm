@@ -19,7 +19,13 @@ const learn = defineCollection({
     elements: z.array(element).default([]),
     widget: z.enum(['dof', 'frames']).optional(),
     sources: z
-      .array(z.object({ label: z.string(), url: z.string().url() }))
+      .array(
+        z.object({
+          label: z.string(),
+          url: z.string().url(),
+          kind: z.enum(['video', 'article', 'book', 'site']).default('article'),
+        }),
+      )
       .default([]),
   }),
 });

@@ -6,12 +6,16 @@ elements: [이야기, 생략, 색, 공기]
 sources:
   - label: "John Szarkowski — The Photographer's Eye (MoMA, 1966)"
     url: https://store.moma.org/products/the-photographers-eye-paperback
+    kind: book
   - label: "Saul Leiter Foundation — Color photographs"
     url: https://www.saulleiterfoundation.org/color
+    kind: site
   - label: "FRAMES — Look Closer: For the Love of Saul Leiter"
     url: https://readframes.com/look-closer-for-the-love-of-saul-leiter/
+    kind: article
   - label: "Visit Jeju — 김영갑갤러리두모악"
     url: https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000000972
+    kind: site
 ---
 
 ## 왜 남의 사진을 읽나

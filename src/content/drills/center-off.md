@@ -1,5 +1,5 @@
 ---
-no: 7
+no: 10
 stage: 3
 read: [composition]
 title: 가운데와 비켜서기

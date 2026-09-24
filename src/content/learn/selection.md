@@ -6,8 +6,10 @@ elements: [생략, 이야기]
 sources:
   - label: "ICP — Magnum Contact Sheets (전시, 2012)"
     url: https://www.icp.org/exhibitions/magnum-contact-sheets
+    kind: site
   - label: "Kristen Lubben (ed.), Magnum Contact Sheets, Thames & Hudson — photo-eye"
     url: https://www.photoeye.com/bookstore/citation/NT355
+    kind: book
 ---
 
 ## 고르기도 생략이다

@@ -3,6 +3,16 @@ title: 거리가 원근을 만든다
 order: 2
 summary: '"압축"은 렌즈가 아니라 거리에서 온다. 85mm는 나를 뒤로 물러서게 할 뿐이다. 거리별로 무엇이 담기는지 표로 익힌다.'
 elements: [공기, 생략]
+sources:
+  - label: "Martin Castein — Why 85mm Is Misunderstood"
+    url: https://www.youtube.com/watch?v=1_D0ksDGZQA
+    kind: video
+  - label: "Pat Kay — The 85mm Is One Of My Secret Weapons For Unique Images"
+    url: https://www.youtube.com/watch?v=j40_LJzCTOQ
+    kind: video
+  - label: "Meaningful Photography — When to Use the 85mm (And When NOT To)"
+    url: https://www.youtube.com/watch?v=zoqp6m7dUJI
+    kind: video
 ---
 
 ## 압축의 진실
@@ -16,6 +26,14 @@ elements: [공기, 생략]
 - **배경을 크게 쓰고 싶으면**: 더 물러서서 사람을 작게 두고 배경을 끌어온다 (노을, 산, 건물 벽).
 - **배경을 줄이고 싶으면**: 85mm는 원래 배경이 좁다. 반 걸음만 옆으로 가도 배경이 바뀐다.
 - **겹을 쌓고 싶으면**: 멀리 있는 것들끼리는 거리 차이가 작아 보여서 층층이 포개진다. 능선, 지붕, 전봇대, 사람들의 행렬.
+
+## 자리부터 바꾼다
+
+Martin Castein은 85mm가 오해받는 이유를 이렇게 설명한다. 35mm나 50mm로 서던 **그 자리에 서서** 85mm만 끼우면 좁게 잘린 사진만 남는다. 그러면 85mm는 불편한 렌즈가 된다. 85mm는 **공간이 필요하다.** 물러서서, 배경의 작은 조각을 프레임 안으로 들여온다.
+
+Pat Kay는 85mm의 압축을 "살짝"이라고 표현한다. 사람의 눈에 익은 원근은 50mm 언저리라서, 85mm는 배경을 과장되지 않게 **조금만** 당긴다. 200mm처럼 극적이지 않아서 오히려 자연스럽다.
+
+좁은 실내나 골목처럼 물러설 수 없는 곳에서는 85mm가 힘을 잃는다(Meaningful Photography). 그럴 때는 방 전체 대신 방 안의 한 가지를 고른다.
 
 ## 거리별로 담기는 크기
 

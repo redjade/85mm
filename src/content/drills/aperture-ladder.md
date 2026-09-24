@@ -1,5 +1,5 @@
 ---
-no: 3
+no: 4
 stage: 2
 read: [depth]
 title: 조리개 사다리

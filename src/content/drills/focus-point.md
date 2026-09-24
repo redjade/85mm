@@ -1,5 +1,5 @@
 ---
-no: 4
+no: 5
 stage: 2
 read: [focus]
 title: 초점 한 곳

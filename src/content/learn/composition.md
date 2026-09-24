@@ -4,8 +4,21 @@ order: 5
 summary: 가운데와 비켜서기, 여백, 앞쪽의 겹. 85mm가 셔터마다 묻는 질문은 "보는 사람의 눈이 어디로 가야 하는가"다.
 elements: [생략, 이야기, 대비]
 sources:
-  - label: "Victor Laforteza — The 85mm is not just for portraits (a mini masterclass)"
+  - label: "Victor Laforteza — The 85mm is not just for portraits (a mini masterclass) · 협찬 Viltrox"
     url: https://www.youtube.com/watch?v=i8-1ZBxfK_U
+    kind: video
+  - label: "Martin Castein — Why 85mm Is Misunderstood"
+    url: https://www.youtube.com/watch?v=1_D0ksDGZQA
+    kind: video
+  - label: "Aristeidis Sfakianos — Mastering Composition With an 85mm Lens"
+    url: https://www.youtube.com/watch?v=KRc7K2ltb5g
+    kind: video
+  - label: "Aristeidis Sfakianos — 85mm Street Photography: 5 Lessons That Changed How I Shoot"
+    url: https://www.youtube.com/watch?v=q0Z_YgIlfOQ
+    kind: video
+  - label: "Mike Chudley — Why 85mm is RUINING your Street Photography (반대 의견)"
+    url: https://www.youtube.com/watch?v=8jAev1AecMk
+    kind: video
 ---
 
 ## 셔터마다 하는 질문
@@ -38,6 +51,32 @@ sources:
 > 우리의 일은 깊이를 만드는 것이다. 2D 이미지가 3D처럼 느껴지게, 보는 사람이 그 안으로 들어가게. (Laforteza가 들었다는 어느 사진가의 말)
 
 깊이를 만드는 재료는 **빛, 대비, 겹**이다. 겹이 가장 쉽다.
+
+## 배경, 배경, 배경
+
+Martin Castein이 85mm에 대해 늘 하는 말이다. 85mm에서 **피사체는 대개 좋아 보인다.** 사진을 좋게도 나쁘게도 만드는 것은 배경이다. 넣을 수 있는 것이 적은 만큼, 무엇을 넣느냐가 사진을 크게 바꾼다.
+
+- 배경을 흐리기만 하면 그 사람은 지구 어디에 있어도 상관없는 사람이 된다.
+- 배경의 **작은 조각**을 들여와 장소를 말하게 한다. 해변이면 파도의 선 하나, 골목이면 간판 한 귀퉁이.
+- 배경을 먼저 고르고, 피사체가 그 앞에 오도록 내가 움직이거나 기다린다.
+
+## 보여 주지 않기
+
+Aristeidis Sfakianos는 85mm의 좁은 프레임에서 **보이지 않는 것이 보이는 것만큼 강하다**고 말한다.
+
+- 얼굴 대신 손, 발, 실루엣만 보여 주면 보는 사람이 궁금해하고, 이야기를 스스로 채운다.
+- 문틀, 창, 그림자, 기둥이나 울타리 사이의 틈이 모두 프레임이 된다. 프레임은 넣은 것으로 눈을 이끌고, **뺀 것에 의미를 준다.**
+- 85mm에서는 피사체를 가운데에 두는 것도 잘 어울린다. 좁은 화각이 이미 주변을 정리해 주기 때문이다.
+
+## 반대편의 목소리
+
+Mike Chudley는 거리 사진에서 85mm가 **오히려 실력을 막을 수 있다**고 주장한다.
+
+- 녹아내린 배경과 압축은 렌즈가 만들어 주는 효과다. 그 효과에 감탄하다 보면 **이야기를 담는 능력**이 아니라 장비가 만든 모습에 만족하게 된다.
+- 좋은 거리 사진은 "이건 사진이다"라고 외치지 않는다. 28mm나 35mm는 주변을 넣을 수밖에 없어서 더 어렵고, 그래서 구도와 순간을 보는 눈이 더 단련된다.
+
+85mm만 쓰는 사람에게 필요한 경고다. 가끔 **조여서** 찍어 본다. 흐림 없이도 사진이 서는지. Laforteza가 말한 "게으른 사진"도 같은 이야기다.
+
 
 ## 발로 하는 줌
 

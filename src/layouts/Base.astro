@@ -17,6 +17,7 @@ const nav = [
   { href: u('/drills/'), label: '연습' },
   { href: u('/photos/'), label: '기록' },
   { href: u('/trace/'), label: '궤적' },
+  { href: u('/more/'), label: '더 볼 것' },
 ];
 ---
 
@@ -94,6 +95,7 @@ const nav = [
   .site-footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; font-size: 0.9375rem; color: var(--ink-faint); }
   .site-footer p { margin: 0; }
   @media (max-width: 520px) {
+    .site-header { position: static; }
     .bar { padding-top: 0.5rem; padding-bottom: 0.4rem; }
     nav { gap: 1rem; font-size: 0.95rem; }
   }

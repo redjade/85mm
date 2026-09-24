@@ -4,10 +4,24 @@ order: 8
 summary: 풍경을 담지 않고 풍경에서 떼어낸다. 겹, 공기, 패턴, 빛 한 조각. f/5.6~8, 30m에 초점을 두면 15m부터 무한대까지.
 elements: [공기, 생략, 빛, 대비]
 sources:
+  - label: "Meaningful Photography — When to Use the 85mm (And When NOT To)"
+    url: https://www.youtube.com/watch?v=zoqp6m7dUJI
+    kind: video
+  - label: "Jason Vong — Why I will never shut up about the 85mm · 협찬 Viltrox"
+    url: https://www.youtube.com/watch?v=KUCTo4gyHsw
+    kind: video
+  - label: "Aristeidis Sfakianos — Mastering Composition With an 85mm Lens"
+    url: https://www.youtube.com/watch?v=KRc7K2ltb5g
+    kind: video
   - label: "Fstoppers — Why the 85mm Lens Is for More Than Just Portraits"
     url: https://fstoppers.com/gear/why-85mm-lens-more-just-portraits-680021
+    kind: article
   - label: "Fstoppers — Why the 85mm Lens is More Versatile Than You Think"
     url: https://fstoppers.com/gear/why-85mm-lens-more-versatile-think-678919
+    kind: article
+  - label: "캐논코리아 — 망원렌즈의 편견을 깨다! 망원렌즈로 찍은 풍경사진"
+    url: https://kr.canon/magazine/detail/5070
+    kind: article
 ---
 
 ## 담기 대신 떼어내기
@@ -19,6 +33,8 @@ sources:
 1. 전체를 눈으로 먼저 본다.
 2. 손가락으로 작은 사각형을 만들어 여기저기 대 본다(85mm는 대략 팔을 뻗은 손바닥 크기).
 3. 겹치는 곳, 반복되는 곳, 빛이 떨어진 곳, 색이 다른 곳에서 멈춘다.
+
+85mm로는 광각 같은 탁 트인 전경을 담을 수 없다. Meaningful Photography도 그 점은 분명히 한다. 대신 장면의 **한 조각**을 고르고, 그 조각이 내가 담고 싶었던 바로 그것일 때가 많다고 말한다.
 
 ## 겹 (레이어)
 
@@ -35,6 +51,14 @@ sources:
 - **이른 아침과 해 질 녘, 비 온 뒤**가 공기가 보이는 시간이다.
 - 역광으로 공기를 찍으면 빛의 층이 된다.
 - 여섯 개의 단어 가운데 **공기**를 가장 잘 찍는 화각이 85mm라고 생각한다.
+
+## 도시도 풍경이다
+
+Jason Vong은 85mm로 도시를 찍을 때 먼 건물들이 당겨지며 **겹이 생기는 것**을 좋아한다. 같은 자리에서 24mm로 찍은 사진과 나란히 놓으면 원근이 완전히 다르다. 85mm에서는 건물들이 마치 **의도를 가지고 줄지어 세워진 것처럼** 정돈되어 보인다.
+
+- 아파트 벽면, 창문 격자, 지붕들, 간판이 겹친 거리.
+- 긴 길은 압축되어 짧아 보이면서도 더 웅장해진다(Aristeidis Sfakianos).
+- Sfakianos의 안개 연작: 짙은 안개 속 나무들과 걸어가는 두 실루엣. 공기가 겹을 나눠 준다.
 
 ## 패턴과 반복
 

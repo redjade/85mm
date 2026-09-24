@@ -15,6 +15,10 @@ export async function getStaticPaths() {
 
 const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
+const KIND_LABEL = { video: '영상', article: '글', book: '책', site: '사이트' } as const;
+const sourceGroups = (['video', 'article', 'book', 'site'] as const)
+  .map((k) => ({ label: KIND_LABEL[k], items: entry.data.sources.filter((s) => s.kind === k) }))
+  .filter((g) => g.items.length);
 const drills = (await getDrills()).filter((d) => d.data.read.some((r) => r.id === entry.id));
 ---
 
@@ -41,16 +45,21 @@ const drills = (await getDrills()).filter((d) => d.data.read.some((r) => r.id ==
     )
   }
   {
-    entry.data.sources.length > 0 && (
+    sourceGroups.length > 0 && (
       <>
         <h2>참고</h2>
-        <ul class="small">
-          {entry.data.sources.map((s) => (
-            <li>
-              <a href={s.url} rel="noopener">{s.label}</a>
-            </li>
-          ))}
-        </ul>
+        {sourceGroups.map((g) => (
+          <>
+            <h3 class="src-kind">{g.label}</h3>
+            <ul class="small">
+              {g.items.map((s) => (
+                <li>
+                  <a href={s.url} rel="noopener">{s.label}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        ))}
       </>
     )
   }
@@ -62,5 +71,6 @@ const drills = (await getDrills()).filter((d) => d.data.read.some((r) => r.id ==
 
 <style>
   .top { margin-bottom: 1rem; }
+  .src-kind { font-family: var(--sans); font-size: 1rem; color: var(--ink-soft); margin: 1.2rem 0 0.3rem; }
   .pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
 </style>

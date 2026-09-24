@@ -1,5 +1,5 @@
 ---
-no: 8
+no: 11
 stage: 3
 read: [composition]
 title: 여백 절반

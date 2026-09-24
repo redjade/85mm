@@ -1,5 +1,5 @@
 ---
-no: 16
+no: 20
 stage: 6
 read: [seeing]
 title: 20분 머물기
