@@ -7,7 +7,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = '85mm 렌즈 하나로 보는 법을 다시 배우는 개인 연습장.' } = Astro.props;
+const { title, description = '85mm 렌즈 하나로 연습하고 기록하는 개인 노트.' } = Astro.props;
 const fullTitle = title ? `${title} · 85mm` : '85mm';
 const path = Astro.url.pathname;
 
